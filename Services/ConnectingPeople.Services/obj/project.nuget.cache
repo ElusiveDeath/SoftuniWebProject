@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ONMPHXBQrH2CsJChL+oc+ja18EoN8Dt6vsfeluI2ov4NHGj2hfNUts/AfSjvbi8RnAuEJ1kG3Ar0PICoZ7F9pg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ElusiveDeath\\Desktop\\Niki Template\\Services\\ConnectingPeople.Services\\ConnectingPeople.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512"
+  ],
+  "logs": []
+}

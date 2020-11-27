@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "eFb2lV9L6gJxPUiXlTKj33v1qE8jGU9Js1iVjXFGw0GFxongw98m0hiWE5hkue4hR9m/6+MomgJFB30UnJj5hg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ElusiveDeath\\Desktop\\Niki Template\\Services\\ConnectingPeople.Services.Mapping\\ConnectingPeople.Services.Mapping.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

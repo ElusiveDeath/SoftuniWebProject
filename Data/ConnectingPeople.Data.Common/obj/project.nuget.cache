@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "CmDNLT71uq/URIWt7J7BvxIYgj46w25/X9Y+i7yYut4dlopHEfuCtGEgWyaB4QIO01wSJkU9Q8mXCWOWmt8KCw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ElusiveDeath\\Desktop\\Niki Template\\Data\\ConnectingPeople.Data.Common\\ConnectingPeople.Data.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.205\\stylecop.analyzers.1.2.0-beta.205.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.205\\stylecop.analyzers.unstable.1.2.0.205.nupkg.sha512",
+    "C:\\Users\\ElusiveDeath\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
