@@ -3,7 +3,7 @@ namespace ConnectingPeople.Data.Models
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using ConnectingPeople.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
@@ -17,6 +17,34 @@ namespace ConnectingPeople.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        //User info
+
+        [Required]
+        [MaxLength(14)]
+        [MinLength(3)]
+        public override string UserName { get => base.UserName; set => base.UserName = value; }
+
+        [Required]
+        [MaxLength(30)]
+        [MinLength(2)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(40)]
+        [MinLength(2)]
+        public string LastName { get; set; }
+
+        [Required]
+        [MaxLength(30)]
+        [MinLength(2)]
+        public string City { get; set; }
+
+        [MaxLength(600)]
+        public string Description { get; set; }
+
+        public string ImageName { get; set; }
+
 
         // Audit info
         public DateTime CreatedOn { get; set; }

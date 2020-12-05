@@ -1,7 +1,7 @@
 ﻿namespace ConnectingPeople.Web
 {
     using System.Reflection;
-
+    using System.Security.Policy;
     using ConnectingPeople.Data;
     using ConnectingPeople.Data.Common;
     using ConnectingPeople.Data.Common.Repositories;
@@ -64,6 +64,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,6 +104,10 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute(
+                            name: "profile",
+                            pattern: "Profile/ByName/{username?}",
+                            defaults: new { controller = "Profile", action = "ByName" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

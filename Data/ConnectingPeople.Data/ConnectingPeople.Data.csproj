@@ -11,6 +11,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201203121525_UserUpdate.cs" />
+    <Compile Remove="Migrations\20201203121525_UserUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20201203122241_UserUpdate.cs" />
+    <Compile Remove="Migrations\20201203122241_UserUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20201203131030_ApplicationUserUpdated.cs" />
+    <Compile Remove="Migrations\20201203131030_ApplicationUserUpdated.Designer.cs" />
+    <Compile Remove="Migrations\20201203131558_ApplicationUserUpdate.cs" />
+    <Compile Remove="Migrations\20201203131558_ApplicationUserUpdate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 
@@ -22,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
