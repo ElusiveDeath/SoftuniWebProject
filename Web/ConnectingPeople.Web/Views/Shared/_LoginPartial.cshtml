@@ -13,7 +13,7 @@
                 <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
             </li>
         }
-        <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="All">Chat</a>
+        <a class="nav-link text-dark fas fa-comment-medical fa-2x" asp-area="" asp-controller="Chat" asp-action="All"></a>
         <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="">Профил</a>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">

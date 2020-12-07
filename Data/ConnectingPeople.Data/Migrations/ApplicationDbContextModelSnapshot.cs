@@ -169,9 +169,15 @@ namespace ConnectingPeople.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("CreatorId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -181,7 +187,13 @@ namespace ConnectingPeople.Data.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RatingId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("RatingId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -196,8 +208,11 @@ namespace ConnectingPeople.Data.Migrations
 
                     b.HasIndex("CreatorId");
 
+                    b.HasIndex("IsDeleted");
+
                     b.HasIndex("RatingId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[RatingId] IS NOT NULL");
 
                     b.ToTable("HelpTasks");
                 });
@@ -227,13 +242,27 @@ namespace ConnectingPeople.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FAIconClass")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NameInCyrillic")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Items");
                 });
@@ -245,12 +274,24 @@ namespace ConnectingPeople.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("CreatorComment")
                         .HasColumnType("nvarchar(160)")
                         .HasMaxLength(160);
 
                     b.Property<int>("CreatorRating")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PartnerComment")
                         .HasColumnType("nvarchar(160)")
@@ -263,6 +304,8 @@ namespace ConnectingPeople.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Ratings");
                 });
@@ -411,11 +454,9 @@ namespace ConnectingPeople.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ConnectingPeople.Data.Models.Rating", "Rating")
+                    b.HasOne("ConnectingPeople.Data.Models.Rating", null)
                         .WithOne("HelpTask")
-                        .HasForeignKey("ConnectingPeople.Data.Models.HelpTask", "RatingId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ConnectingPeople.Data.Models.HelpTask", "RatingId");
                 });
 
             modelBuilder.Entity("ConnectingPeople.Data.Models.HelpTaskItems", b =>
