@@ -109,7 +109,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapHub<ChatHub>("/chat");
+                        endpoints.MapHub<ChatHub>("/chat/{id}");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute(
                             name: "profile",
