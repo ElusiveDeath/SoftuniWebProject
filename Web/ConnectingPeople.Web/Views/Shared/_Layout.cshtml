@@ -14,7 +14,7 @@
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
-<body style="background:#E8F6F3">
+<body style="background: url('@Url.Content("~/background.jpg")');">
     <header>
         <nav style="background:#D0ECE7" class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container">
@@ -38,14 +38,14 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div style="background:#E8F6F3; border:lightblue 5px groove" class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 mr-4 ml-4">
             @this.RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer style="background:#D0ECE7" class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
