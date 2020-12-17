@@ -8,7 +8,6 @@
 
     public class HomeController : BaseController
     {
-        [Authorize]
         public IActionResult Index()
         {
             return this.View();
