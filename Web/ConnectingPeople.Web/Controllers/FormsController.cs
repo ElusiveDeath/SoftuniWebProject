@@ -155,6 +155,19 @@
             return this.RedirectToAction("ChatById", "Chat", new { id = chatId });
         }
 
+        [Authorize]
+        public IActionResult StartHelpTask()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult StartHelpTask(string todo)
+        {
+            return this.RedirectToAction("Index", "Home");
+        }
+
         private string SaveImage(IFormFile image)
         {
             Image img;

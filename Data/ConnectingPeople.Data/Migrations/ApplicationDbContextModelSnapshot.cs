@@ -279,6 +279,9 @@ namespace ConnectingPeople.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PartnerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("RatingId")
                         .HasColumnType("int");
 
@@ -295,6 +298,8 @@ namespace ConnectingPeople.Data.Migrations
                     b.HasIndex("CreatorId");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PartnerId");
 
                     b.HasIndex("RatingId")
                         .IsUnique()
@@ -573,6 +578,10 @@ namespace ConnectingPeople.Data.Migrations
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ConnectingPeople.Data.Models.ApplicationUser", "Partner")
+                        .WithMany("HelpTasksAsPartner")
+                        .HasForeignKey("PartnerId");
 
                     b.HasOne("ConnectingPeople.Data.Models.Rating", null)
                         .WithOne("HelpTask")

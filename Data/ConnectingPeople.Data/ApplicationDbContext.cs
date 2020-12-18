@@ -63,6 +63,16 @@
             builder.Entity<UserChat>()
                 .HasKey(uc => new { uc.UserId, uc.ChatId });
 
+            builder.Entity<HelpTask>()
+                .HasOne(ht => ht.Partner)
+                .WithMany(p => p.HelpTasksAsPartner)
+                .HasForeignKey(ht => ht.PartnerId);
+
+            builder.Entity<HelpTask>()
+                .HasOne(ht => ht.Creator)
+                .WithMany(c => c.HelpTasks)
+                .HasForeignKey(ht => ht.CreatorId);
+
             base.OnModelCreating(builder);
 
             this.ConfigureUserIdentityRelations(builder);

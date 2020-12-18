@@ -41,6 +41,10 @@ namespace ConnectingPeople.Data.Models
 
         public int? RatingId { get; set; }
 
+        public string PartnerId { get; set; }
+
+        public ApplicationUser Partner { get; set; }
+
         public ICollection<HelpTaskItems> Items { get; set; } = new List<HelpTaskItems>();
     }
 }
