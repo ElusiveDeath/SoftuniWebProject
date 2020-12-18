@@ -154,7 +154,7 @@
         [HttpPost]
         public async Task<IActionResult> Apply(ApplyFormInputModel input)
         {
-            if(string.IsNullOrWhiteSpace(input.MessageText))
+            if (!ModelState.IsValid)
             {
                 return this.Redirect(this.Request.GetDisplayUrl());
             }

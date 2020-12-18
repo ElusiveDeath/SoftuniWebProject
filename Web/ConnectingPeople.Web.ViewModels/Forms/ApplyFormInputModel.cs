@@ -7,6 +7,9 @@ namespace ConnectingPeople.Web.ViewModels.Forms
 {
     public class ApplyFormInputModel
     {
+        private const string stringLengthErrorMessage = "Полето \"{0}\" трябва да бъде между {2} и {1} символа.";
+        private const string requiredFieldErrorMessage = "Полето \"{0}\" e задължително!";
+
         public int HelpTaskId { get; set; }
 
         public string About { get; set; }
@@ -19,6 +22,8 @@ namespace ConnectingPeople.Web.ViewModels.Forms
 
         public string OthersideConnectionId { get; set; }
 
+        [Required(ErrorMessage = requiredFieldErrorMessage)]
+        [StringLength(500, ErrorMessage = stringLengthErrorMessage, MinimumLength = 10)]
         [Display(Name = "Съобщение:")]
         public string MessageText { get; set; }
     }
