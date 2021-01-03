@@ -14,10 +14,14 @@ namespace ConnectingPeople.Web.ViewModels.Profile
 
         public int OthersideRating { get; set; }
 
+        public string OthersideRatingColorClass { get; set; }
+
         public string CreatorName { get; set; }
 
         public string CreatorComment { get; set; }
 
         public string CreatorRating { get; set; }
+
+        public string CreatorRatingColorClass { get; set; }
     }
 }

@@ -24,7 +24,9 @@ namespace ConnectingPeople.Services.Data
 
         TitleAndCreatorUsernameDTO GetTitleAndCreatorUsernameById(int id);
 
-        Task StartHelpTask(int helpTaskId, string partnerId);
+        Task StartHelpTaskAsync(int helpTaskId, string partnerId);
+
+        Task FinishHelpTaskAsync(int rating, string comment, string username, int helpTaskId);
 
         ICollection<StartedTasksViewModel> GetUserAllStartedTasks(string username);
 

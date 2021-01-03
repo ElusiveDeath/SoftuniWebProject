@@ -180,9 +180,9 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult StartHelpTask(int helpTaskId, string partnerId)
+        public async Task<IActionResult> StartHelpTask(int helpTaskId, string partnerId)
         {
-            this.helpTaskService.StartHelpTask(helpTaskId, partnerId);
+            await this.helpTaskService.StartHelpTaskAsync(helpTaskId, partnerId);
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -201,8 +201,14 @@
         }
 
         [HttpPost]
-        public IActionResult Finish()
+        public async Task<IActionResult> Finish(FinishFormInputModel input)
         {
+            var isCreator = input.CreatorComment != null;
+            var comment = isCreator ? input.CreatorComment : input.OthersideComment;
+            var rating = isCreator ? input.CreatorRating : input.OthersideRating;
+            var username = isCreator ? input.CreatorUsername : input.OthersideUsername;
+
+            await this.helpTaskService.FinishHelpTaskAsync(rating, comment, username, input.HelpTaskId);
             return this.RedirectToAction("Index", "Home");
         }
 

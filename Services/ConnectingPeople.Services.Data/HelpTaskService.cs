@@ -25,15 +25,18 @@ namespace ConnectingPeople.Services.Data
     public class HelpTaskService : IHelpTaskService
     {
         private readonly IDeletableEntityRepository<HelpTask> helpTaskRepo;
+        private readonly IDeletableEntityRepository<Rating> ratingRepo;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IItemService itemService;
 
         public HelpTaskService(
             IDeletableEntityRepository<HelpTask> helpTaskRepository,
+            IDeletableEntityRepository<Rating> ratingRepository,
             UserManager<ApplicationUser> userManager,
             IItemService itemService)
         {
             this.helpTaskRepo = helpTaskRepository;
+            this.ratingRepo = ratingRepository;
             this.userManager = userManager;
             this.itemService = itemService;
         }
@@ -111,13 +114,82 @@ namespace ConnectingPeople.Services.Data
 
         public async Task Delete(int id)
         {
-            //var helpTask = this.helpTaskRepo.All()
-            //    .Where(ht => ht.Id == id)
-            //    .FirstOrDefault();
-
-            this.helpTaskRepo.Delete(this.helpTaskRepo.All()
+            var helpTask = this.helpTaskRepo.All()
                 .Where(ht => ht.Id == id)
-                .FirstOrDefault());
+                .FirstOrDefault();
+
+            this.helpTaskRepo.Delete(helpTask);
+            await this.helpTaskRepo.SaveChangesAsync();
+        }
+
+        public async Task FinishHelpTaskAsync(int rating, string comment, string username, int helpTaskId)
+        {
+            var helpTask = this.helpTaskRepo.All()
+                .Where(x => x.Id == helpTaskId)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.RatingId,
+                    OthersideUsername = x.Partner.UserName,
+                    CreatorUsername = x.Creator.UserName,
+                })
+                .FirstOrDefault(x => x.Id == helpTaskId);
+
+            var taskRating = new Rating();
+
+            if (helpTask.CreatorUsername == username)
+            {
+                taskRating.CreatorComment = comment;
+                taskRating.CreatorRating = rating;
+                switch (rating > 7 ? "green" :
+                        rating > 3 ? "yellow" : "red")
+                {
+                    case "green":
+                        taskRating.CreatorRatingColorClass = "btn-success";
+                        break;
+                    case "yellow":
+                        taskRating.CreatorRatingColorClass = "btn-warning";
+                        break;
+                    case "red":
+                        taskRating.CreatorRatingColorClass = "btn-danger";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                taskRating.OthersideComment = comment;
+                taskRating.OthersideRating = rating;
+                switch (rating > 7 ? "green" :
+                        rating > 3 ? "yellow" : "red")
+                {
+                    case "green":
+                        taskRating.OthersideRatingColorClass = "btn-success";
+                        break;
+                    case "yellow":
+                        taskRating.OthersideRatingColorClass = "btn-warning";
+                        break;
+                    case "red":
+                        taskRating.OthersideRatingColorClass = "btn-danger";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            taskRating.OthersideUsername = helpTask.OthersideUsername;
+            taskRating.TaskId = helpTask.Id;
+            await this.ratingRepo.AddAsync(taskRating);
+            await this.ratingRepo.SaveChangesAsync();
+
+            var ratingId = this.ratingRepo.AllAsNoTracking()
+                .Where(x => x.TaskId == helpTask.Id)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+
+            this.helpTaskRepo.All()
+                .FirstOrDefault(x => x.Id == helpTaskId)
+                .RatingId = ratingId;
             await this.helpTaskRepo.SaveChangesAsync();
         }
 
@@ -182,7 +254,7 @@ namespace ConnectingPeople.Services.Data
             return startedTasks;
         }
 
-        public async Task StartHelpTask(int helpTaskId, string partnerId)
+        public async Task StartHelpTaskAsync(int helpTaskId, string partnerId)
         {
             var helpTask = this.helpTaskRepo.All()
                 .FirstOrDefault(x => x.Id == helpTaskId);

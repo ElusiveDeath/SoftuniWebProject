@@ -3,6 +3,13 @@
     var isTypeNeed = Model.Type == ConnectingPeople.Common.Enums.TaskType.Need;
     ViewData["titleName"] = isTypeNeed ? "Получил помощ за:" : "Помогнал за:";
     ViewData["toFrom"] = isTypeNeed ? "От:" : "На:";
+
+    ViewData["CreatorRatingColorClassOrDefault"] = Model.Rating.CreatorRatingColorClass != null ?
+        Model.Rating.CreatorRatingColorClass :
+        "btn-secondary";
+    ViewData["OthersideRatingColorClassOrDefault"] = Model.Rating.OthersideRatingColorClass != null ?
+        Model.Rating.OthersideRatingColorClass :
+        "btn-secondary";
 }
 
 <div class="row-cols">
@@ -22,15 +29,15 @@
         <div class="row">
             <p class="col-1 mr-5">@Model.Rating.OthersideUsername Оценка</p>
             <p class="col-9 ml-4">@Model.Rating.OthersideComment</p>
-            <text class=" col-0 btn-success btn-sm btn-group-vertical float-right">@Model.Rating.OthersideRating/10</text>
+            <text class=" col-0 btn-sm btn-group-vertical float-right @ViewData["OthersideRatingColorClassOrDefault"]">@Model.Rating.OthersideRating/10</text>
         </div>
         <div class="row">
             <hr class="col float-right bg-transparent" />
         </div>
         <div class="row">
-            <p class="col-1 mr-5">@Model.Rating.CreatorName Оценка</p>
+            <p class="col-1 mr-5">@Model.CreatorUserName Оценка</p>
             <p class="col-9 ml-4">@Model.Rating.CreatorComment</p>
-            <text class=" col-0 btn-success btn-sm btn-group-vertical float-right">@Model.Rating.CreatorRating/10</text>
+            <text class=" col-0 btn-sm btn-group-vertical float-right @ViewData["CreatorRatingColorClassOrDefault"]">@Model.Rating.CreatorRating/10</text>
 
         </div>
     </div>
